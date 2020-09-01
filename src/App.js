@@ -45,7 +45,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get("https://gettodos.azurewebsites.net/api/GetTodos?code=3CkMhC5BPzPDOhr57QRv94UXXLxEfQ6uaqhpd7xa/axbPv7qPH0U8Q==").then((res) => {
+    axios.get("http://localhost:7071/api/GetTodos").then((res) => {
       //console.log(res)
       this.setState({ todos: res.data })
     })
