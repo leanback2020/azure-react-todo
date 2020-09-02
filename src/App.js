@@ -45,10 +45,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:7071/api/GetTodos").then((res) => {
-      //console.log(res)
-      this.setState({ todos: res.data })
-    })
+    try {
+      console.log("Trying to connect to Azure Function")
+      const response = axios.get("https://gettodos.azurewebsites.net/api/GetTodos").then((res) => this.setState({ todos: res.data }))
+      console.log(response)
+    } catch (error) {
+      console.log("Could not log in")
+      console.log(error)
+    }
   }
 
   //https://jsonplaceholder.typicode.com/todos
