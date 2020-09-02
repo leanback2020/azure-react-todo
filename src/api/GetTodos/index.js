@@ -3,7 +3,7 @@
 const { MongoClient } = require("mongodb")
 
 const config = {
-  url: process.env.CONNECTIONSTRING,
+  url: "mongodb+srv://mainUser:Mongo@2020@cluster0-z1att.mongodb.net/ReactTodo?retryWrites=true&w=majority", //process.env.CONNECTIONSTRING,
   dbName: "ReactTodo",
 }
 
