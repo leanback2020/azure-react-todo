@@ -61,9 +61,6 @@ class App extends Component {
   }
 
   checkComplete = (_id) => {
-    //http://localhost:7071/api/updateTodoItem
-    //https://todocrudfunc.azurewebsites.net/api/updateTodoItem/{_id}
-    // props.todos.map((todo) => <TodoItem key={todo._id} todo={todo} checkComplete={props.checkComplete} delTodo={props.delTodo} />)
     this.state.todos.map((todo) => {
       if (todo._id === _id) {
         console.log("Updating Completed Status For ID: " + _id)
@@ -109,14 +106,14 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <div className="container">
+          <div className="">
             <Header />
             <Route
               exact
               path="/"
               render={(props) => (
                 <React.Fragment>
-                  <AddTodo addTodo={this.addTodo} />
+                  <AddTodo className="container" addTodo={this.addTodo} />
                   <Todos todos={this.state.todos} checkComplete={this.checkComplete} delTodo={this.delTodo} />
                 </React.Fragment>
               )}

@@ -30,3 +30,8 @@ a {
 .btn:hover {
   background: #666;
 }
+
+#inner {
+  width: 50%;
+  margin: 0 auto;
+}

@@ -26,18 +26,6 @@ export class TodoItem extends Component {
     }
   }
 
-  getStyle2 = () => {
-    if (this.props.todo.completed) {
-      return {
-        background: "#f4f4f4",
-      }
-    } else {
-      return {
-        background: "#f40000",
-      }
-    }
-  }
-
   state = {
     text: "Not Started",
   }
@@ -48,7 +36,7 @@ export class TodoItem extends Component {
       e.target.style.background = "#BFB"
       text = "Finished"
     } else {
-      e.target.style.background = "#0F0"
+      e.target.style.background = "#0C0"
       e.target.style.border = "none"
       e.target.style.borderRadius = "20%"
       e.target.style.outline = "none"
@@ -65,10 +53,10 @@ export class TodoItem extends Component {
           <input type="checkbox" checked={this.props.todo.completed} onChange={this.props.checkComplete.bind(this, _id)} /> {title} {"  "}
           {!this.props.todo.completed && (
             <button onClick={(e) => this.changeText(e, "InProgress")} style={btnStyleProgress}>
-              {text}
+              {"   "} {text}
             </button>
           )}
-          {this.props.todo.completed && <button style={btnStyleProgress}>Finished</button>}
+          {this.props.todo.completed && <button style={btnStyleProgressFinished}>Finished</button>}
           <button onClick={this.props.delTodo.bind(this, _id)} style={btnStyle}>
             X
           </button>
@@ -92,6 +80,18 @@ const btnStyleProgress = {
   padding: "5px 9px",
   borderRadius: "20%",
   cursor: "pointer",
+  margin: "0px 10px",
+}
+
+const btnStyleProgressFinished = {
+  background: "#333",
+  color: "#fff",
+  border: "none",
+  padding: "5px 9px",
+  borderRadius: "20%",
+  cursor: "pointer",
+  margin: "0px 10px",
+  fontStyle: "italic",
 }
 
 const btnStyle = {
