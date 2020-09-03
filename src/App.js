@@ -91,12 +91,12 @@ class App extends Component {
 
   addTodo = (title) => {
     const newTodo = {
-      id: uuid(),
+      _id: uuid(),
       title: title,
       completed: false,
-    }
+    } //http://localhost:7071/api/CreateTodoItem   https://jsonplaceholder.typicode.com/todos // https://todocrudfunc.azurewebsites.net/api/CreateTodoItem?code=5rl5Pv9S/6i1zNihec7Oeaja0/aK5SqBVNReZ7RgIIP1eBMtR7rBWQ==
     axios
-      .post("https://jsonplaceholder.typicode.com/todos", {
+      .post("https://todocrudfunc.azurewebsites.net/api/CreateTodoItem?code=5rl5Pv9S/6i1zNihec7Oeaja0/aK5SqBVNReZ7RgIIP1eBMtR7rBWQ==", {
         title: title,
         completed: false,
       })
