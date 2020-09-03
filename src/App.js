@@ -83,9 +83,11 @@ class App extends Component {
   }
 
   //Delete Todo
-  delTodo = (id) => {
-    console.log("id: " + id)
-    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then((res) => this.setState({ todos: [...this.state.todos.filter((todo) => todo.id !== id)] }))
+  //https://todocrudfunc.azurewebsites.net/api/DeleteTodoItem/{_id}?code=n0rdvWzq/aivg563RGr4RK30Wf6XW/HnqMIOFbD1PUidFekmQ2Bxmg==
+  //https://jsonplaceholder.typicode.com/todos https://todocrudfunc.azurewebsites.net/api/DeleteTodoItem/5f50cb2c079c6d1794a139cb?code=n0rdvWzq/aivg563RGr4RK30Wf6XW/HnqMIOFbD1PUidFekmQ2Bxmg==
+  delTodo = (_id) => {
+    console.log("Deleting id: " + _id)
+    axios.delete(`https://todocrudfunc.azurewebsites.net/api/DeleteTodoItem/${_id}?code=${process.env.REACT_APP_AZFUNCCODEDEL}`).then((res) => this.setState({ todos: [...this.state.todos.filter((todo) => todo._id !== _id)] }))
     //spread operator ...
   }
 
