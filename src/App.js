@@ -46,30 +46,43 @@ class App extends Component {
 
   componentDidMount() {
     try {
-      console.log("Trying to connect to Azure Function")
-      const response = axios.get("https://gettodos.azurewebsites.net/api/GetTodos").then((res) => this.setState({ todos: res.data }))
-      console.log(response)
+      console.log("Trying to connect to Azure Function GetTodos")
+      axios.get("https://gettodos.azurewebsites.net/api/GetTodos").then((res) => {
+        this.setState({
+          todos: res.data,
+        })
+      })
     } catch (error) {
       console.log("Could not log in")
       console.log(error)
     }
   }
 
-  //https://jsonplaceholder.typicode.com/todos
-  //Toggle Complete
-  checkComplete = (id) => {
-    this.setState({
-      todos: this.state.todos.map((todo) => {
-        if (todo.id === id) {
-          todo.completed = !todo.completed
-        }
-        return todo
-      }),
+  checkComplete = (_id) => {
+    console.log("Toggle Todo Item")
+
+    // props.todos.map((todo) => <TodoItem key={todo._id} todo={todo} checkComplete={props.checkComplete} delTodo={props.delTodo} />)
+    this.state.todos.map((todo) => {
+      if (todo._id === _id) {
+        console.log("id1: " + _id)
+        axios.put(`http://localhost:7071/api/updateTodoItem/${_id}`, { completed: !todo.completed }).then((res) => {
+          this.setState({
+            todos: this.state.todos.map((todo) => {
+              if (todo._id === _id) {
+                todo.completed = !todo.completed
+              }
+              return todo
+            }),
+          })
+        })
+      }
+      return false
     })
   }
 
   //Delete Todo
   delTodo = (id) => {
+    console.log("id: " + id)
     axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then((res) => this.setState({ todos: [...this.state.todos.filter((todo) => todo.id !== id)] }))
     //spread operator ...
   }
