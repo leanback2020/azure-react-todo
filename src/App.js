@@ -43,11 +43,13 @@ class App extends Component {
   state = {
     todos: [],
   }
-
+  //https://todocrudfunc.azurewebsites.net/api/GetTodos?
+  //https://todocrudfunc.azurewebsites.net/api/GetTodos
+  //https://gettodos.azurewebsites.net/api/GetTodos
   componentDidMount() {
     try {
       console.log("Trying to connect to Azure Function GetTodos")
-      axios.get("https://gettodos.azurewebsites.net/api/GetTodos").then((res) => {
+      axios.get("https://todocrudfunc.azurewebsites.net/api/GetTodos").then((res) => {
         this.setState({
           todos: res.data,
         })
@@ -59,13 +61,13 @@ class App extends Component {
   }
 
   checkComplete = (_id) => {
-    console.log("Toggle Todo Item")
-
+    //http://localhost:7071/api/updateTodoItem
+    //https://todocrudfunc.azurewebsites.net/api/updateTodoItem/{_id}
     // props.todos.map((todo) => <TodoItem key={todo._id} todo={todo} checkComplete={props.checkComplete} delTodo={props.delTodo} />)
     this.state.todos.map((todo) => {
       if (todo._id === _id) {
-        console.log("id1: " + _id)
-        axios.put(`http://localhost:7071/api/updateTodoItem/${_id}`, { completed: !todo.completed }).then((res) => {
+        console.log("Updating Completed Status For ID: " + _id)
+        axios.put(`https://todocrudfunc.azurewebsites.net/api/updateTodoItem/${_id}`, { completed: !todo.completed }).then((res) => {
           this.setState({
             todos: this.state.todos.map((todo) => {
               if (todo._id === _id) {
