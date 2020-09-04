@@ -80,9 +80,7 @@ class App extends Component {
   }
 
   //Delete Todo
-  //https://todocrudfunc.azurewebsites.net/api/DeleteTodoItem/{_id}?code=n0rdvWzq/aivg563RGr4RK30Wf6XW/HnqMIOFbD1PUidFekmQ2Bxmg==
-  //https://jsonplaceholder.typicode.com/todos https://todocrudfunc.azurewebsites.net/api/DeleteTodoItem/5f50cb2c079c6d1794a139cb?code=n0rdvWzq/aivg563RGr4RK30Wf6XW/HnqMIOFbD1PUidFekmQ2Bxmg==
-  delTodo = (_id) => {
+   delTodo = (_id) => {
     console.log("Deleting id: " + _id)
     axios.delete(`https://todocrudfunc.azurewebsites.net/api/DeleteTodoItem/${_id}?code=${process.env.REACT_APP_AZFUNCCODEDEL}`).then((res) => this.setState({ todos: [...this.state.todos.filter((todo) => todo._id !== _id)] }))
     //spread operator ...
@@ -93,8 +91,7 @@ class App extends Component {
       _id: uuid(),
       title: title,
       completed: false,
-    } //http://localhost:7071/api/CreateTodoItem   https://jsonplaceholder.typicode.com/todos // https://todocrudfunc.azurewebsites.net/api/CreateTodoItem?code=5rl5Pv9S/6i1zNihec7Oeaja0/aK5SqBVNReZ7RgIIP1eBMtR7rBWQ==
-    axios
+    }    axios
       .post("https://todocrudfunc.azurewebsites.net/api/CreateTodoItem?code=5rl5Pv9S/6i1zNihec7Oeaja0/aK5SqBVNReZ7RgIIP1eBMtR7rBWQ==", {
         title: title,
         completed: false,
