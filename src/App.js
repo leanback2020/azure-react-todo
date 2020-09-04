@@ -9,43 +9,10 @@ import { v4 as uuid } from "uuid"
 
 import "./App.css"
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <h1>leanBack</h1>
-//       <Todos />
-//     </div>
-//   )
-// }
-/*
-state = {
-  todos: [
-    {
-      id: uuid(),
-      title: "Start learning React.js",
-      completed: false,
-    },
-    {
-      id: uuid(),
-      title: "Read on Azure Solution Architect exam",
-      completed: false,
-    },
-    {
-      id: uuid(),
-      title: "Learn CosmoDB",
-      completed: false,
-    },
-  ],
-}
-*/
-
 class App extends Component {
   state = {
     todos: [],
   }
-  //https://todocrudfunc.azurewebsites.net/api/GetTodos?
-  //https://todocrudfunc.azurewebsites.net/api/GetTodos
-  //https://gettodos.azurewebsites.net/api/GetTodos
   componentDidMount() {
     try {
       console.log("Trying to connect to Azure Function GetTodos")
@@ -80,9 +47,9 @@ class App extends Component {
   }
 
   //Delete Todo
-   delTodo = (_id) => {
+  delTodo = (_id) => {
     console.log("Deleting id: " + _id)
-    axios.delete(`https://todocrudfunc.azurewebsites.net/api/DeleteTodoItem/${_id}?code=${process.env.REACT_APP_AZFUNCCODEDEL}`).then((res) => this.setState({ todos: [...this.state.todos.filter((todo) => todo._id !== _id)] }))
+    axios.delete(`https://todocrudfunc.azurewebsites.net/api/DeleteTodoItem/${_id}?code=${process.env["REACT_APP_AZFUNCCODEDEL"]}`).then((res) => this.setState({ todos: [...this.state.todos.filter((todo) => todo._id !== _id)] }))
     //spread operator ...
   }
 
@@ -91,7 +58,8 @@ class App extends Component {
       _id: uuid(),
       title: title,
       completed: false,
-    }    axios
+    }
+    axios
       .post("https://todocrudfunc.azurewebsites.net/api/CreateTodoItem?code=5rl5Pv9S/6i1zNihec7Oeaja0/aK5SqBVNReZ7RgIIP1eBMtR7rBWQ==", {
         title: title,
         completed: false,
