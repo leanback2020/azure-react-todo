@@ -1,6 +1,6 @@
-##This is a small react app, using Azure Static Web Site with GitHub workflow for CI/CD.
+### This is a small react app, using Azure Static Web Site with GitHub workflow for CI/CD.
 
-##The app is using a serverless backend with Azure Functions, to store data in a Mongo database
+### The app is using a serverless backend with Azure Functions, to store data in a Mongo database
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

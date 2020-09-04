@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import logo from "../../images/leanBack.png"
-//57, 21, 52
+
 const headerStyle = {
   background: "#391633",
   color: "#fff",
