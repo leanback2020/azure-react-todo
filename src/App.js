@@ -49,7 +49,8 @@ class App extends Component {
   //Delete Todo
   delTodo = (_id) => {
     console.log("Deleting id: " + _id)
-    axios.delete(`https://todocrudfunc.azurewebsites.net/api/DeleteTodoItem/${_id}?code=${process.env["REACT_APP_AZFUNCCODEDEL"]}`).then((res) => this.setState({ todos: [...this.state.todos.filter((todo) => todo._id !== _id)] }))
+    console.log(process.env)
+    axios.delete(`https://todocrudfunc.azurewebsites.net/api/DeleteTodoItem/${_id}?code=${process.env.REACT_APP_AZFUNCCODEDEL}`).then((res) => this.setState({ todos: [...this.state.todos.filter((todo) => todo._id !== _id)] }))
     //spread operator ...
   }
 
