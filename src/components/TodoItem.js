@@ -1,77 +1,55 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
+import React, { useState, useContext } from "react"
+import { GlobalContext } from "../context/GlobalState"
 
-export class TodoItem extends Component {
-  getStyle = () => {
-    if (this.props.todo.completed) {
-      return {
-        background: "#f4f4f4",
-        padding: "10px",
-        borderBottom: "1px #ccc dotted",
-        textDecoration: "line-through",
-      }
-    } else {
-      return {
-        textDecoration: "none",
-      }
-    }
-  }
-
-  getStyleShort = () => {
+export const TodoItem = ({ todo }) => {
+  //function TodoItem(props) {
+  const { deleteTodoItem, updateTodoComplete } = useContext(GlobalContext)
+  const [text, setText] = useState("Not Started")
+  function getStyleShort() {
     return {
       background: "#f4f4f4",
-      padding: "10px",
+      padding: "5px",
       borderBottom: "1px #ccc dotted",
-      textDecoration: this.props.todo.completed ? "line-through" : "none",
+      textDecoration: todo.completed ? "line-through" : "none",
+      height: "42px",
     }
   }
 
-  state = {
-    text: "Not Started",
-  }
-
-  changeText = (e, text) => {
+  function changeText(e, str) {
     e.preventDefault()
-    if (this.props.todo.completed) {
+    if (todo.completed) {
       e.target.style.background = "#BFB"
-      text = "Finished"
+      str = "Finished"
     } else {
       e.target.style.background = "#0C0"
       e.target.style.border = "none"
       e.target.style.borderRadius = "20%"
       e.target.style.outline = "none"
     }
-    this.setState({ text })
+    setText(str)
   }
 
-  render() {
-    const { text } = this.state
-    const { _id, title } = this.props.todo
-    return (
-      <div style={this.getStyleShort()}>
-        <p>
-          <input type="checkbox" checked={this.props.todo.completed} onChange={this.props.checkComplete.bind(this, _id)} /> {title} {"  "}
-          {!this.props.todo.completed && (
-            <button onClick={(e) => this.changeText(e, "InProgress")} style={btnStyleProgress}>
-              {"   "} {text}
-            </button>
-          )}
-          {this.props.todo.completed && <button style={btnStyleProgressFinished}>Finished</button>}
-          <button onClick={this.props.delTodo.bind(this, _id)} style={btnStyle}>
-            X
+  //const { text } = this.state
+  const { _id, title } = todo
+  return (
+    <div style={getStyleShort()}>
+      <p>
+        <input type="checkbox" checked={todo.completed} onChange={() => updateTodoComplete(todo)} /> {title} {"  "}
+        {!todo.completed && (
+          <button onClick={(e) => changeText(e, "InProgress")} style={btnStyleProgress}>
+            {"   "} {text}
           </button>
-        </p>
-      </div>
-    )
-  }
+        )}
+        {todo.completed && <button style={btnStyleProgressFinished}>Finished</button>}
+        <button onClick={() => deleteTodoItem(_id)} style={btnStyle}>
+          X
+        </button>
+      </p>
+    </div>
+  )
 }
 
 //PropTypes
-TodoItem.propTypes = {
-  todo: PropTypes.object.isRequired,
-  checkComplete: PropTypes.func.isRequired,
-  delTodo: PropTypes.func.isRequired,
-}
 
 const btnStyleProgress = {
   background: "#ff9900",

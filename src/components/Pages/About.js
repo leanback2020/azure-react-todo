@@ -6,13 +6,15 @@ function About() {
       <br />
       <br />
       <h1>About</h1>
-      <br />  
-      <p>This is a small react app, using Azure Static Web Site with GitHub workflow for CI/CD.</p>
+      <br />
+      <p className="lead text-muted">This is a small react app, using Azure Static Web Site with GitHub workflow for CI/CD.</p>
       <br />
       <p>The app is using a serverless backend with Azure Functions, to store data in a Mongo database</p>
       <br />
+      <p>This react app is using some basic react features (hooks) like: useEffect, useState, useContext, useReducer, createContext, BrowserRouter, Switch, Route </p>
+      <br />
       <p>GitHub</p>
-      <a href="https://github.com/leanback2020/react-todo">https://github.com/leanback2020/react-todo</a>
+      <a href="https://github.com/leanback2020/azure-react-todo">https://github.com/leanback2020/azure-react-todo</a>
     </div>
   )
 }

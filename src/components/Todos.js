@@ -1,17 +1,21 @@
-import React from "react"
+import React, { useEffect, useContext } from "react"
 import TodoItem from "./TodoItem"
-import PropTypes from "prop-types"
+import LoadingDotsIcon from "./LoadingDotsIcon"
+import { GlobalContext } from "../context/GlobalState"
 
-function Todos(props) {
-  // console.log(props.todos)
-  return props.todos.map((todo) => <TodoItem key={todo._id} todo={todo} checkComplete={props.checkComplete} delTodo={props.delTodo} />)
+export const Todos = () => {
+  const { todos, getTodoItems, loading } = useContext(GlobalContext)
+
+  useEffect(() => {
+    getTodoItems()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  if (loading) {
+    return <LoadingDotsIcon />
+  }
+
+  return todos.map((todo) => <TodoItem key={todo._id} todo={todo} />)
 }
 
-//PropTypes
-Todos.propTypes = {
-  todos: PropTypes.array.isRequired,
-  checkComplete: PropTypes.func.isRequired,
-  delTodo: PropTypes.func.isRequired,
-}
-
-export default Todos
+//export default Todos

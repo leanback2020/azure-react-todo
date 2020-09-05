@@ -1,33 +1,31 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
+import React, { useState, useContext } from "react"
+import { GlobalContext } from "../context/GlobalState"
 
-export class AddTodo extends Component {
-  state = {
-    title: "",
-  }
+function AddTodo(props) {
+  const [text, setText] = useState("")
+  const { addTodoItem } = useContext(GlobalContext)
 
-  onChangeAddTodo = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
-  onSubmit = (e) => {
+  async function onSubmit(e) {
     e.preventDefault()
-    this.props.addTodo(this.state.title)
-    this.setState({ title: "" })
+    console.log("AddTodo onSubmit - Title: " + text)
+    try {
+      const newTodo = {
+        title: text,
+        completed: false,
+      }
+      addTodoItem(newTodo)
+      setText("")
+    } catch (error) {
+      console.log("Could not submit item: " + error)
+    }
   }
 
-  render() {
-    return (
-      <form onSubmit={this.onSubmit} style={{ display: "flex" }}>
-        <input type="text" name="title" placeholder="Add Todo..." style={{ flex: "10", padding: "5px" }} value={this.state.title} onChange={this.onChangeAddTodo} />
-        <input type="submit" value="Submit" className="btn" style={{ flex: "1" }} />
-      </form>
-    )
-  }
-}
-
-AddTodo.propTypes = {
-  addTodo: PropTypes.func.isRequired,
+  return (
+    <form onSubmit={onSubmit} style={{ display: "flex" }}>
+      <input type="text" value={text} onChange={(e) => setText(e.target.value)} style={{ flex: "10", padding: "5px" }} placeholder="Enter todo..." />
+      <input type="submit" value="Submit" className="btn" style={{ flex: "1" }} />
+    </form>
+  )
 }
 
 export default AddTodo
