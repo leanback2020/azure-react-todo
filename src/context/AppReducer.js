@@ -13,17 +13,6 @@ export default (state, action) => {
         ...state,
         messages: [...state.messages, action.value],
       }
-    case "addTodoItem":
-      console.log("Reducer - Added todo item")
-      console.log(action.value)
-      state.todos.push(action.value)
-      break
-    case "deleteTodoItem":
-      console.log("Reducer - delete todo item")
-      return {
-        ...state,
-        todos: state.todos.filter((todo) => todo.id !== action.value),
-      }
     case "GET_TODOITEMS":
       console.log("AppReducer: Get")
       console.log(action.payload)
@@ -37,7 +26,6 @@ export default (state, action) => {
       return {
         ...state,
         todos: [...state.todos.filter((todo) => todo._id !== action.payload)],
-        //todos: state.todos.filter((todo) => todo.id !== action.payload),
       }
     case "ADD_TODOITEM":
       return {
@@ -51,6 +39,17 @@ export default (state, action) => {
         todos: state.todos.map((todo) => {
           if (todo._id === action.payload._id) {
             todo.completed = !todo.completed
+          }
+          return todo
+        }),
+      }
+    case "UPDATE_TODOITEMINPROGRESS":
+      console.log("AppReducer Update")
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo._id === action.payload._id) {
+            todo.inprogress = !todo.inprogress
           }
           return todo
         }),

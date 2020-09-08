@@ -1,10 +1,14 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import { GlobalContext } from "../context/GlobalState"
 
 export const TodoItem = ({ todo }) => {
-  //function TodoItem(props) {
-  const { deleteTodoItem, updateTodoComplete } = useContext(GlobalContext)
+  const { deleteTodoItem, updateTodoComplete, UpdateInProgress } = useContext(GlobalContext)
   const [text, setText] = useState("Not Started")
+
+  useEffect(() => {
+    if (todo.inprogress == true) setText("InProgress")
+  }, [])
+
   function getStyleShort() {
     return {
       background: "#f4f4f4",
@@ -21,15 +25,20 @@ export const TodoItem = ({ todo }) => {
       e.target.style.background = "#BFB"
       str = "Finished"
     } else {
-      e.target.style.background = "#0C0"
-      e.target.style.border = "none"
-      e.target.style.borderRadius = "20%"
-      e.target.style.outline = "none"
+      if (e.target.innerText == "InProgress") {
+        str = "Not Started"
+        e.target.style.background = "#ff9900"
+      } else {
+        e.target.style.background = "#0C0"
+        e.target.style.border = "none"
+        e.target.style.borderRadius = "20%"
+        e.target.style.outline = "none"
+      }
     }
+    UpdateInProgress(todo)
     setText(str)
   }
 
-  //const { text } = this.state
   const { _id, title } = todo
   return (
     <div style={getStyleShort()}>

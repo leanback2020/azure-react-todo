@@ -4,6 +4,7 @@ import { Todos } from "./components/Todos"
 import AddTodo from "./components/AddTodo"
 import Header from "./components/layout/Header"
 import About from "./components/Pages/About"
+import HomeGuest from "./components/Pages/HomeGuest"
 //import { v4 as uuid } from "uuid"
 import LoadingDotsIcon from "./components/LoadingDotsIcon"
 import FlashMessages from "./components/FlashMessages"
@@ -24,6 +25,7 @@ function App() {
             <Todos />
           </Route>
           <Route path="/about" exact component={About} />
+          {/* <Route path="/guest" exact component={HomeGuest} /> */}
         </Switch>
       </BrowserRouter>
     </GlobalProvider>

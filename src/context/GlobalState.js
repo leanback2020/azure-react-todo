@@ -58,10 +58,27 @@ export const GlobalProvider = ({ children }) => {
   async function updateTodoComplete(todo) {
     try {
       console.log("updateTodoComplete ID: " + todo._id)
-      await axios.put(`https://todocrudfunc.azurewebsites.net/api/updateTodoItem/${todo._id}`, { completed: !todo.completed })
+      await axios.put(`https://todocrudfunc.azurewebsites.net/api/updateTodoItem/${todo._id}`, { completed: !todo.completed, inprogress: false })
 
       dispatch({
         type: "UPDATE_TODOITEMCOMPLETE",
+        payload: todo,
+      })
+    } catch (err) {
+      dispatch({
+        type: "TODOITEM_ERROR",
+        payload: err,
+      })
+    }
+  }
+
+  async function UpdateInProgress(todo) {
+    try {
+      console.log("UpdateInProgress ID: " + todo._id)
+      await axios.put(`https://todocrudfunc.azurewebsites.net/api/updateTodoItem/${todo._id}`, { inprogress: !todo.inprogress })
+
+      dispatch({
+        type: "UPDATE_TODOITEMINPROGRESS",
         payload: todo,
       })
     } catch (err) {
@@ -77,6 +94,7 @@ export const GlobalProvider = ({ children }) => {
       const response = await axios.post("https://todocrudfunc.azurewebsites.net/api/CreateTodoItem?code=5rl5Pv9S/6i1zNihec7Oeaja0/aK5SqBVNReZ7RgIIP1eBMtR7rBWQ==", {
         title: todo.title,
         completed: false,
+        inprogress: false,
       })
       todo._id = response.data._id
       dispatch({
@@ -106,6 +124,7 @@ export const GlobalProvider = ({ children }) => {
         deleteTodoItem,
         addTodoItem,
         updateTodoComplete,
+        UpdateInProgress,
       }}
     >
       {children}
