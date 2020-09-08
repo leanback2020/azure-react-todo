@@ -6,8 +6,8 @@ export const TodoItem = ({ todo }) => {
   const [text, setText] = useState("Not Started")
 
   useEffect(() => {
-    if (todo.inprogress == true) setText("InProgress")
-  }, [])
+    if (todo.inprogress === true) setText("InProgress")
+  }, [todo.inprogress])
 
   function getStyleShort() {
     return {
@@ -25,7 +25,7 @@ export const TodoItem = ({ todo }) => {
       e.target.style.background = "#BFB"
       str = "Finished"
     } else {
-      if (e.target.innerText == "InProgress") {
+      if (e.target.innerText === "InProgress") {
         str = "Not Started"
         e.target.style.background = "#ff9900"
       } else {
