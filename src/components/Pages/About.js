@@ -1,4 +1,5 @@
 import React from "react"
+import { GitHubIcon } from "../icons"
 
 function About() {
   return (
@@ -14,7 +15,9 @@ function About() {
       <p>This react app is using some basic react features (hooks) like: useEffect, useState, useContext, useReducer, createContext, BrowserRouter, Switch, Route </p>
       <br />
       <p>GitHub</p>
-      <a href="https://github.com/leanback2020/azure-react-todo">https://github.com/leanback2020/azure-react-todo</a>
+      <a className="btn btn-primary" href=">https://github.com/leanback2020/azure-react-todo">
+        <GitHubIcon width={"18px"} /> <span className="ml-2 mr-4">Visit Repo</span>
+      </a>
     </div>
   )
 }

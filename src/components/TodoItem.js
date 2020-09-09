@@ -44,8 +44,13 @@ export const TodoItem = ({ todo }) => {
     <div style={getStyleShort()}>
       <p>
         <input type="checkbox" checked={todo.completed} onChange={() => updateTodoComplete(todo)} /> {title} {"  "}
-        {!todo.completed && (
+        {!todo.completed && !todo.inprogress && (
           <button onClick={(e) => changeText(e, "InProgress")} style={btnStyleProgress}>
+            {"   "} {text}
+          </button>
+        )}
+        {!todo.completed && todo.inprogress && (
+          <button onClick={(e) => changeText(e, "InProgress")} style={btnStyleInProgress}>
             {"   "} {text}
           </button>
         )}
@@ -62,6 +67,16 @@ export const TodoItem = ({ todo }) => {
 
 const btnStyleProgress = {
   background: "#ff9900",
+  color: "#fff",
+  border: "none",
+  padding: "5px 9px",
+  borderRadius: "20%",
+  cursor: "pointer",
+  margin: "0px 10px",
+}
+
+const btnStyleInProgress = {
+  background: "#0C0",
   color: "#fff",
   border: "none",
   padding: "5px 9px",
