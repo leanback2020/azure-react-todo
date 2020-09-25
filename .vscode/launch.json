@@ -1,4 +1,4 @@
-{
+/*{
   "version": "0.2.0",
   "configurations": [
     {
@@ -7,6 +7,19 @@
       "name": "Launch Chrome against localhost",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}"
+    }
+  ]
+}
+*/
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to Node Functions",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "preLaunchTask": "func: host start"
     }
   ]
 }

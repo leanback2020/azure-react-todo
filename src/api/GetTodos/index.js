@@ -20,7 +20,6 @@ module.exports = async (context) => {
   const Todos = db.collection("todo")
   const res = await Todos.find({})
   const body = await res.toArray()
-
   connection.close()
 
   context.res = {
