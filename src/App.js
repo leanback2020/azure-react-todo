@@ -9,20 +9,33 @@ import About from "./components/Pages/About"
 import LoadingDotsIcon from "./components/LoadingDotsIcon"
 import FlashMessages from "./components/FlashMessages"
 import { GlobalProvider } from "./context/GlobalState"
+import LoginButton from "./components/LoginButton"
+import LogoutButton from "./components/LogoutButton"
+import { useAuth0 } from "@auth0/auth0-react"
+
 import "./App.css"
 
 function App() {
+  const { user, isAuthenticated } = useAuth0()
   return (
     <GlobalProvider>
       <BrowserRouter>
         <Header />
+
         <Suspense fallback={<LoadingDotsIcon />}></Suspense>
 
         <FlashMessages />
         <Switch>
           <Route exact path="/">
-            <AddTodo className="container" />
-            <Todos />
+            {isAuthenticated ? (
+              <>
+                {" "}
+                <h2>{user.name}</h2>
+                <AddTodo className="container" /> <Todos /> <LogoutButton />{" "}
+              </>
+            ) : (
+              <LoginButton />
+            )}
           </Route>
           <Route path="/about" exact component={About} />
           {/* <Route path="/guest" exact component={HomeGuest} /> */}
