@@ -8,7 +8,7 @@ import config from "./authConfig.json"
 require("dotenv").config()
 
 ReactDOM.render(
-  <Auth0Provider domain={config.domain} clientId={config.clientId} redirectUri={window.location.origin}>
+  <Auth0Provider domain="dev-hg0m5gt3.eu.auth0.com" clientId="cBrVnGA2p7hJw9DV9N6IrEHlo4Jb5yZD" redirectUri={window.location.origin}>
     <App />,
   </Auth0Provider>,
   document.getElementById("root")
