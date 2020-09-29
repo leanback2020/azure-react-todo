@@ -19,26 +19,25 @@ function App() {
       <BrowserRouter>
         <Header />
         <Suspense fallback={<LoadingDotsIcon />}></Suspense>
-        <LogoutButton />
         <FlashMessages />
         <Switch>
           <Route exact path="/">
             {isAuthenticated ? (
               <>
                 {" "}
-                <h2>{user.name}</h2>
-                <AddTodo className="container" /> <Todos /> <LogoutButton />{" "}
+                <h2>Welcome {user.nickname}</h2>
+                <AddTodo className="container" />
+                <Todos />
+                <LogoutButton />{" "}
               </>
             ) : (
               <LoginButton />
             )}
           </Route>
           <Route path="/about" exact component={About} />
-          {/* <Route path="/guest" exact component={HomeGuest} /> */}
         </Switch>
       </BrowserRouter>
     </GlobalProvider>
   )
 }
-
 export default App

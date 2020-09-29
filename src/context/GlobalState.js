@@ -35,6 +35,22 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  async function getTodoItemsByUserId(userid) {
+    console.log("getTodoItemsByUserId")
+    try {
+      const response = await axios.get(`https://todocrudfunc.azurewebsites.net/api/todoitems/${userid}`)
+      dispatch({
+        type: "GET_TODOITEMS",
+        payload: response.data,
+      })
+    } catch (err) {
+      dispatch({
+        type: "TODOITEM_ERROR",
+        payload: err,
+      })
+    }
+  }
+
   async function getConfiguration() {
     console.log("getConfiguration")
     try {
@@ -112,6 +128,7 @@ export const GlobalProvider = ({ children }) => {
         title: todo.title,
         completed: false,
         inprogress: false,
+        userid: todo.userid,
       })
       todo._id = response.data._id
       dispatch({
@@ -139,6 +156,7 @@ export const GlobalProvider = ({ children }) => {
         messages: state.messages,
         domainid: state.domainid,
         getTodoItems,
+        getTodoItemsByUserId,
         getConfiguration,
         deleteTodoItem,
         addTodoItem,
