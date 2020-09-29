@@ -8,6 +8,7 @@ const initialState = {
   error: null,
   loading: true,
   messages: [],
+  domainid: "",
 }
 
 // Create context
@@ -24,6 +25,22 @@ export const GlobalProvider = ({ children }) => {
       const response = await axios.get(`https://todocrudfunc.azurewebsites.net/api/GetTodos`)
       dispatch({
         type: "GET_TODOITEMS",
+        payload: response.data,
+      })
+    } catch (err) {
+      dispatch({
+        type: "TODOITEM_ERROR",
+        payload: err,
+      })
+    }
+  }
+
+  async function getConfiguration() {
+    console.log("getConfiguration")
+    try {
+      const response = await axios.get(`http://localhost:7071/api/GetConfiguration`)
+      dispatch({
+        type: "GET_CONF",
         payload: response.data,
       })
     } catch (err) {
@@ -120,7 +137,9 @@ export const GlobalProvider = ({ children }) => {
         error: state.error,
         loading: state.loading,
         messages: state.messages,
+        domainid: state.domainid,
         getTodoItems,
+        getConfiguration,
         deleteTodoItem,
         addTodoItem,
         updateTodoComplete,

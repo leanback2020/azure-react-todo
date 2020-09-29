@@ -21,6 +21,13 @@ export default (state, action) => {
         loading: false,
         todos: action.payload,
       }
+    case "GET_CONF":
+      console.log("Appreducer: GetConfig")
+      console.log(action.payload)
+      return {
+        ...state,
+        domainid: action.payload.domain_id,
+      }
     case "DELETE_TODOITEM":
       console.log("AppReducer: Delete " + action.payload)
       return {
