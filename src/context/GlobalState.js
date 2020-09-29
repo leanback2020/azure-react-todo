@@ -38,7 +38,7 @@ export const GlobalProvider = ({ children }) => {
   async function getConfiguration() {
     console.log("getConfiguration")
     try {
-      const response = await axios.get(`http://localhost:7071/api/GetConfiguration`)
+      const response = await axios.get(`https://todocrudfunc.azurewebsites.net/api/GetConfiguration`).domain_id
       dispatch({
         type: "GET_CONF",
         payload: response.data,

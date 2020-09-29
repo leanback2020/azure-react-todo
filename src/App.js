@@ -26,6 +26,7 @@ function App() {
       <BrowserRouter>
         <Auth0Provider domain={"domainid"} clientId={"cBrVnGA2p7hJw9DV9N6IrEHlo4Jb5yZD"} redirectUri={window.location.origin}>
           <Header />
+          <div>{process.env.NODE_ENV}</div>
           <div>{process.env.REACT_APP_AUTH0_CLIENT_ID}</div>
           <Suspense fallback={<LoadingDotsIcon />}></Suspense>
           <LogoutButton />
