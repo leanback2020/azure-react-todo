@@ -8,9 +8,12 @@ function About() {
       <br />
       <h1>About</h1>
       <br />
-      <p className="lead text-muted">This is a small react app, using Azure Static Web Site with GitHub workflow for CI/CD.</p>
+      <p className="lead text-muted">This is a small react app, using Azure Static Web Site with GitHub Action/workflow for CI/CD.</p>
       <br />
-      <p>The app is using a serverless backend with Azure Functions, to store data in a Mongo database</p>
+      <p>
+        The app is using a serverless backend with Azure Functions, to store data in a Mongo database.
+        <br /> Auth0 is used for authentication.
+      </p>
       <br />
       <p>This react app is using some basic react features (hooks) like: useEffect, useState, useContext, useReducer, createContext, BrowserRouter, Switch, Route </p>
       <br />

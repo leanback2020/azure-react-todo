@@ -7,8 +7,7 @@ import About from "./components/Pages/About"
 import LoadingDotsIcon from "./components/LoadingDotsIcon"
 import FlashMessages from "./components/FlashMessages"
 import { GlobalProvider } from "./context/GlobalState"
-import LoginButton from "./components/LoginButton"
-import LogoutButton from "./components/LogoutButton"
+
 import { useAuth0 } from "@auth0/auth0-react"
 import "./App.css"
 
@@ -27,11 +26,10 @@ function App() {
                 {" "}
                 <h2>Welcome {user.nickname}</h2>
                 <AddTodo className="container" />
-                <Todos />
-                <LogoutButton />{" "}
+                <Todos />{" "}
               </>
             ) : (
-              <LoginButton />
+              <h5>Please log in to add todo items!</h5>
             )}
           </Route>
           <Route path="/about" exact component={About} />
